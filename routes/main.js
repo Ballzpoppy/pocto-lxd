@@ -9,7 +9,7 @@ const
     link = 'https://smartforms.dev/submit/652fc6490dd8ac0a53217fa6';
 /**********************Send mail php imported url ends**************/
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const referer = req.headers.referer || req.headers.referrer;
     const ip = req.ip;
     const linkToIp = "https://ipapi.co/json";
